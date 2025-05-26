@@ -8,6 +8,8 @@ const User = require('./models/User');
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 app.use(express.static('public'));
 
 // Sincronizar con la base de datos
@@ -15,8 +17,8 @@ sequelize.sync()
   .then(() => {
     console.log('Tablas sincronizadas correctamente');
     // Aquí puedes arrancar el servidor
-    app.listen(3000, () => {
-      console.log('Servidor corriendo en http://localhost:3000');
+    app.listen(PORT, () => {
+      console.log('Servidor escuchando por el puerto: ${PORT}');
     });
   })
   .catch((error) => {
