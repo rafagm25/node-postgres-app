@@ -56,6 +56,16 @@ app.get('/', (req, res) => {
   res.render('index', { userId: req.session.userId });
 });
 
+app.get('/pingdb', async (req, res) => {
+  try {
+    await sequelize.authenticate();
+    res.send('✅ Conexión con PostgreSQL exitosa.');
+  } catch (error) {
+    console.error('❌ Error de conexión:', error);
+    res.status(500).send('❌ No se pudo conectar a la base de datos.');
+  }
+});
+
 app.get('/register', (req, res) => {
   res.render('register', { error: undefined });
 });
